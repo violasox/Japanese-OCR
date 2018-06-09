@@ -1,0 +1,8 @@
+ETL2/*
+bin/*
+include/*
+lib/*
+share/*
+__pycache__/*
+pip-selfcheck.json
+.python-version
