@@ -7,7 +7,8 @@ class Extract:
         self.samples = []
         # Read the contents of one character image
         chunk = f.read(self.chunkSize)
-        while chunk is not None:
+        count = 0
+        while len(chunk) == self.chunkSize:
             sample = Sample()
             # Convert 6-bit characters to bytes
             bytes = self.convertChunk(chunk)
@@ -17,15 +18,14 @@ class Extract:
             # Get the print style
             sample.style = bytes[6]
             # Get the character type
-            self.type = bytes[12:18]
+            sample.type = bytes[12:18]
             # Get the character code
-            self.character = bytes[28:30]
+            sample.character = bytes[28:30]
             # Get the image of the character
-            self.image = bytes[50:3660]
+            sample.image = bytes[50:3660]
             self.samples.append(sample)
             chunk = f.read(self.chunkSize)
-            break
-
+            count += 1
         f.close()
 
         
